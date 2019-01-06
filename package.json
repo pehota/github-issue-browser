@@ -2,6 +2,9 @@
   "name": "github-fe",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=8.9.0"
+  },
   "dependencies": {
     "apollo-boost": "^0.1.23",
     "graphql": "^14.0.2",
@@ -17,10 +20,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "analyze": "source-map-explorer build/static/js/main.*",
-    "lint": "eslint src",
-  },
-  "eslintConfig": {
-    "extends": "react-app"
+    "lint": "tslint -c tslint.json --project tsconfig.json",
+    "lint:fix": "tslint -c tslint.json --project tsconfig.json --fix"
   },
   "browserslist": [
     ">0.2%",
@@ -33,6 +34,13 @@
     "@types/node": "^10.12.18",
     "@types/react": "^16.7.18",
     "@types/react-dom": "^16.0.11",
+    "prettier": "^1.15.3",
+    "source-map-explorer": "^1.6.0",
+    "tslint": "^5.12.0",
+    "tslint-config-prettier": "^1.17.0",
+    "tslint-eslint-rules": "^5.4.0",
+    "tslint-plugin-prettier": "^2.0.1",
+    "tslint-react": "^3.6.0",
     "typescript": "^3.2.2"
   },
   "peerDependencies": {

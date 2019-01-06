@@ -1,0 +1,21 @@
+{
+  "defaultSeverity": "error",
+  "extends": [
+    "tslint:recommended",
+    "tslint-react",
+    "tslint-config-prettier",
+    "tslint-eslint-rules"
+  ],
+  "jsRules": {},
+  "rules": {
+    "prettier": [
+      true,
+      {
+        "singleQuote": true,
+        "trailingComma": "all",
+        "bracketSpacing": true
+      }
+    ]
+  },
+  "rulesDirectory": ["tslint-plugin-prettier"]
+}
