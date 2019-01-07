@@ -1,25 +1,27 @@
-// @format
 import React from 'react';
+import { ApolloProvider } from 'react-apollo';
 import ReactDOM from 'react-dom';
-import {Maybe} from 'tsmonad';
+import { Maybe } from 'tsmonad';
 import App from './App';
-import {ApolloProvider} from 'react-apollo';
 import createClient from './graphql-client';
-import * as serviceWorker from './serviceWorker';
 import './index.css';
+import * as serviceWorker from './serviceWorker';
 
 const maybeToken = Maybe.maybe<string>(
-  process.env.GITHUB_PERSONAL_ACCESS_TOKEN,
+  process.env.REACT_APP_GITHUB_PERSONAL_ACCESS_TOKEN,
 );
 
 ReactDOM.render(
   maybeToken.caseOf({
-    nothing: () => <div> Missing token </div>,
-    just: (token: string) => (
+    just: token => (
       <ApolloProvider
-        client={createClient({uri: 'https://api.github.com/graphql', token})}>
+        client={createClient({ uri: 'https://api.github.com/graphql', token })}
+      >
         <App />
       </ApolloProvider>
+    ),
+    nothing: () => (
+      <div> Missing GitHub auth token. Check the env variables. </div>
     ),
   }),
   document.getElementById('root'),

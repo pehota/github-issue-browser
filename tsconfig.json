@@ -20,9 +20,10 @@
     "jsx": "preserve",
     "sourceMap": true,
     "strictNullChecks": true,
-    "noImplicitAny": true
+    "noImplicitAny": true,
+    "rootDir": "src",
+    "baseUrl": "./"
   },
-  "include": [
-    "src"
-  ]
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules"]
 }

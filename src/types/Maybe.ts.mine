@@ -1,0 +1,53 @@
+// @format
+type Nothing = null | undefined;
+
+type CaseOf<T,U> = {
+  nothing: () => U,
+  just: (x: T) => U
+};
+
+export default class Maybe<T> {
+  private constructor(private value: T ) { }
+
+  static of<T>(value: T): Maybe<T> {
+    return new Maybe<T>(value);
+  }
+
+  static nothing<T>(): Maybe<T> {
+    return Maybe.of<T>(null);
+  }
+
+  static just<T>(value: T): Maybe<T> {
+    return Maybe.of(value);
+  }
+
+  isNothing(): boolean {
+    return this.value === null || this.value === undefined;
+  }
+
+  isJust(): boolean {
+    return this.value !== null && this.value !== undefined;
+  }
+
+  map<U>(fn: (x: T) => U): Maybe<U> {
+    return this.isNothing() ? Maybe.nothing() : Maybe.just(fn(this.value))
+  }
+
+  // chain<U>(fn: (x: T) => Maybe<U>): Maybe<U | Nothing> {
+    // return this.isNothing() ? Maybe.nothing() : Maybe.just(fn(this.value))
+  // }
+
+  valueOr(defaultValue: T): T {
+    return this.isNothing() ? defaultValue : this.value;
+  }
+
+  toString(): string {
+    return this.isNothing() ? 'Nothing' : `Just<${this.value}>`;
+  }
+
+  // caseOf<U>(case: CaseOf<T,U>): U {
+    // return this.isNothing()
+      // ? case.nothing()
+      // : case.just(this.value);
+  // }
+}
