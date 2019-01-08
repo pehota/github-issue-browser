@@ -1,12 +1,12 @@
 // @format
-import {graphql, compose} from 'react-apollo';
-import {getSearchTerm, updateSearchTerm, IRepo} from '../store';
+import { compose, graphql } from 'react-apollo';
 import SearchForm from '../components/SearchForm';
+import { getSearchTerm, IRepo, updateSearchTerm } from '../store';
 
 export default compose(
-  graphql(updateSearchTerm, {name: 'updateSearchTerm'}),
+  graphql(updateSearchTerm, { name: 'updateSearchTerm' }),
   graphql(getSearchTerm, {
-    props: ({data: {searchTerm}}) => ({
+    props: ({ data: { searchTerm } }) => ({
       searchTerm,
     }),
   }),

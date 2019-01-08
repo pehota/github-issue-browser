@@ -1,27 +1,36 @@
 // @format
 import * as React from 'react';
-import {IRepo} from '../store';
+import { IMutationVars, SendMutationVars } from '../store/types';
+
+interface ISearchTermVars {
+  term: string;
+}
 
 interface IProps {
   searchTerm: string;
-  updateSearchTerm: (searchTerm: string) => void;
+  updateSearchTerm: SendMutationVars<ISearchTermVars>;
+  submitSearch: SendMutationVars<ISearchTermVars>;
 }
 
-const SearchForm: React.SFC<IProps> = ({searchTerm, updateSearchTerm}) => {
-  const onSearchInput = e =>
+const SearchForm: React.SFC<IProps> = ({
+  searchTerm,
+  submitSearch,
+  updateSearchTerm,
+}) => {
+  const handleSearchInput = (e: React.FormEvent<HTMLInputElement>) =>
     updateSearchTerm({
       variables: {
-        term: e.target.value,
+        term: e.currentTarget.value,
       },
     });
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+  };
   return (
-    <form
-      onSubmit={e => {
-        e.preventDefault();
-      }}>
+    <form onSubmit={handleSubmit}>
       <div>
         <label>Repository name: </label>
-        <input defaultValue={searchTerm} onInput={onSearchInput} />
+        <input defaultValue={searchTerm} onInput={handleSearchInput} />
         <button>Search</button>
       </div>
     </form>

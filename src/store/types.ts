@@ -26,3 +26,9 @@ export interface IUpdateSearchTerm {
 export interface IFragments {
   [key: string]: string;
 }
+
+export interface IMutationVars<Vars> {
+  variables: Vars;
+}
+
+export type SendMutationVars<T> = (vars: IMutationVars<T>) => void;
