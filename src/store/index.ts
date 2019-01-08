@@ -1,18 +1,9 @@
 // @format
+import { getState } from './queries';
+import { IAppModel, IUpdateSearchTerm, IWithLocalCache } from './types';
+
 export * from './queries';
-
-interface IWithTypeName {
-  __typename: string;
-}
-export interface IRepo extends IWithTypeName {
-  __typename: string;
-  name: string;
-  owner: string;
-}
-
-export interface IAppModel {
-  repo: IRepo | null;
-}
+export * from './mutations';
 
 export const defaults: IAppModel = {
   repo: {
@@ -20,8 +11,24 @@ export const defaults: IAppModel = {
     name: 'react',
     owner: 'facebook',
   },
+  searchTerm: 'react',
 };
 
 export const resolvers = () => ({
-  Mutation: {},
+  Mutation: {
+    updateSearchTerm: (
+      _: any,
+      { term }: IUpdateSearchTerm,
+      { cache }: IWithLocalCache,
+    ) => {
+      const currentState = cache.readQuery({ query: getState });
+
+      cache.writeData({
+        data: {
+          ...currentState,
+          searchTerm: term,
+        },
+      });
+    },
+  },
 });
