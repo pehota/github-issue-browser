@@ -2,12 +2,26 @@
 import * as React from 'react';
 import {IRepo} from '../store';
 
-const SearchForm: React.SFC<IRepo> = ({name}) => {
+interface IProps {
+  searchTerm: string;
+  updateSearchTerm: (searchTerm: string) => void;
+}
+
+const SearchForm: React.SFC<IProps> = ({searchTerm, updateSearchTerm}) => {
+  const onSearchInput = e =>
+    updateSearchTerm({
+      variables: {
+        term: e.target.value,
+      },
+    });
   return (
-    <form onSubmit={e => { console.debug('submitted'); e.preventDefault(); }}>
+    <form
+      onSubmit={e => {
+        e.preventDefault();
+      }}>
       <div>
         <label>Repository name: </label>
-        <input defaultValue={name} />
+        <input defaultValue={searchTerm} onInput={onSearchInput} />
         <button>Search</button>
       </div>
     </form>
