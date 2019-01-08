@@ -1,8 +1,8 @@
 // @format
 import * as React from 'react';
-import './App.css';
-import SearchForm from './containers/SearchForm';
-// import IssuesList from './containers/IssuesList';
+import SearchForm from '../../containers/SearchForm';
+import './styles.css';
+// import IssuesList from '../../containers/IssuesList';
 
 const App: React.SFC<{}> = () => (
   <div className="App">

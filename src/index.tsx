@@ -1,8 +1,8 @@
-import React from 'react';
+import * as React from 'react';
 import { ApolloProvider } from 'react-apollo';
-import ReactDOM from 'react-dom';
+import * as ReactDOM from 'react-dom';
 import { Maybe } from 'tsmonad';
-import App from './App';
+import App from './components/App';
 import createClient from './graphql-client';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
