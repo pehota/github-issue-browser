@@ -19,7 +19,7 @@ export interface IWithLocalCache {
   cache: InMemoryCache;
 }
 
-export interface IUpdateSearchTerm {
+export interface IWithSearchTerm {
   term: string;
 }
 
@@ -32,3 +32,21 @@ export interface IMutationVars<Vars> {
 }
 
 export type SendMutationVars<T> = (vars: IMutationVars<T>) => void;
+
+export interface IIssue extends IWithTypeName {
+  author: IIssueAuthor | null;
+  number: number;
+  state: IssueState;
+  title: string;
+  url: string;
+}
+
+export interface IIssueAuthor {
+  avatarUrl: string;
+  login: string;
+}
+
+export enum IssueState {
+  Open = 'OPEN',
+  Closed = 'CLOSED',
+}

@@ -9,3 +9,13 @@ export const updateSearchTerm = gql`
     }
   }
 `;
+
+export const submitSearch = gql`
+  mutation submitSearch($term: String!) {
+    submitSearch(term: $term) @client {
+      repo {
+        name
+      }
+    }
+  }
+`;

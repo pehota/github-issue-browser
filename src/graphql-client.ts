@@ -14,7 +14,7 @@ export default ({ uri, token }: IClientConfig) => {
       defaults,
       resolvers,
     },
-    headers: { authorization: `Bearer ${token}` },
+    headers: { authorization: `Token ${token}` },
     uri,
   });
 };

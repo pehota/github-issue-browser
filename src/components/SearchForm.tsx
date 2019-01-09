@@ -25,12 +25,20 @@ const SearchForm: React.SFC<IProps> = ({
     });
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    submitSearch({
+      variables: {
+        term: searchTerm,
+      },
+    });
   };
   return (
     <form onSubmit={handleSubmit}>
       <div>
-        <label>Repository name: </label>
-        <input defaultValue={searchTerm} onInput={handleSearchInput} />
+        <input
+          defaultValue={searchTerm}
+          onInput={handleSearchInput}
+          placeholder="Type repository name"
+        />
         <button>Search</button>
       </div>
     </form>
